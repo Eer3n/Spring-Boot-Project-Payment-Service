@@ -2,7 +2,7 @@ We're going to implement a new microservice that'll handle the upcoming payments
 this service would be able to branch out to sup-services and thus should be designed in a way that It can be scaled
 when needed.
 
-Question 1.1
+Question 1.1 (+)
     - create an enum called PaymentChannel that holds the payment methods.
         - CREDIT_CARD_AKBANK
         - CREDIT_CARD_GARANTI
@@ -10,10 +10,10 @@ Question 1.1
         - CREDIT_CARD_IS_BANKASI
         - CREDIT_ING
 
-Question 1.2
+Question 1.2 (+)
     - create an enum called "Gender" and add gender types.
 
-Question 1.3
+Question 1.3 (+)
     - create an enum called "UserCreditStatus" and add necessary information. credit status will determine the trust level
       of given user.
         - FIRST
@@ -26,7 +26,7 @@ Question 1.3
         - BANNED
         - LAST
 
-Question 1.4
+Question 1.4 (+)
     - create dto called "UserDto" with given information. Note that we'll not going to store entity directly in this service.
         - Id (Long)
         - name (String)
@@ -39,7 +39,7 @@ Question 1.4
         - creditScore (int)
         - UserCreditStatus (UserCreditStatus)
 
-Question 2.1
+Question 2.1 (+)
     - create an enum called PaymentType
         - FIRST
         - CREDIT
@@ -57,7 +57,7 @@ Question 2.1
         - NINE_MONTH
         - TWELVE_MONTH
 
-Question 2.2
+Question 2.2 (+)
     - create an entity called "Payment" that holds given information.
     - Id (Long)
     - transactionNumber (Long)
@@ -69,5 +69,5 @@ Question 2.2
     - transactionDate (Date)
     - paymentChannel (PaymentChannel)
 
-Question 3.1
+Question 3.1 (+)
     - create everything :) service, controller, dao, dto, converter, ect...
