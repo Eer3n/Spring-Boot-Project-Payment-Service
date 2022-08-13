@@ -31,4 +31,7 @@ public class User implements Serializable {
     private Gender gender;
     private UserCreditLevel userCreditLevel;
     private UserStatus userStatus;
+
+    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "user")
+    private List<Payment> paymentList;
 }
