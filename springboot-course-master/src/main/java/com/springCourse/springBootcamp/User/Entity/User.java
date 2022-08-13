@@ -1,48 +1,34 @@
 package com.springCourse.springBootcamp.User.Entity;
 
-import com.springCourse.springBootcamp.User.CreditStatus.CreditStatus;
-import com.springCourse.springBootcamp.User.Gender.Gender;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
+import com.springCourse.springBootcamp.User.Enum.Gender;
+import com.springCourse.springBootcamp.User.Enum.UserCreditLevel;
+import com.springCourse.springBootcamp.User.Enum.UserStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Date;
 
 @Entity
-@Table(name = "SPRING_USER")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Table(name = "SPRING_USER", schema = "public")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     private String name;
     private String surname;
-    private int identityNumber;
-    private String mailAddress;
-    private String password;
-    private int age;
-    private int creditScore;
-
-    @Enumerated
+    private String identityNumber;
+    private Date dateOfBirth;
     private Gender gender;
-    private CreditStatus creditStatus;
-
-    @Override
-    public boolean equals(Object o){
-        if(this==o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return Id != null && Objects.equals(Id, user.Id);
-    }
-
-    @Override
-    public int hashCode(){return getClass().hashCode();}
+    private UserCreditLevel userCreditLevel;
+    private UserStatus userStatus;
 }

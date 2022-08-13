@@ -1,5 +1,16 @@
 
 Question 1.1
-    what is behavioral design pattern, and It's purpose.
-    give four behavioral design patterns examples along with their explanations.
+    create an enum called "UserStatus" that hold the current credit status of given user.
+        - GOOD_STANDING
+        - BAD_CREDIT
+        - REVOKED
+        - BANNED
 
+    add UserStatus enum property into User Entity.
+
+Question 1.2
+    Once you created UserStatus enum, you'll implement some methods to manipulate data.
+
+    - create a method in PaymentDao that will return Payments by given User.
+    - create a method in PaymentService that will get Payments as List by given User. Then you should count the amount
+      of payments that their status is

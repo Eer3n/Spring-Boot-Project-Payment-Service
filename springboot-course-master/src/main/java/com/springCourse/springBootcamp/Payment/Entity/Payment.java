@@ -1,54 +1,51 @@
 package com.springCourse.springBootcamp.Payment.Entity;
 
-import com.springCourse.springBootcamp.Payment.Channel.PaymentChannel;
-import com.springCourse.springBootcamp.Payment.Credit.Credit;
-import com.springCourse.springBootcamp.Payment.Installment.PaymentInstallment;
-import com.springCourse.springBootcamp.Payment.Type.PaymentType;
-import com.springCourse.springBootcamp.User.Dto.UserDto;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
+import com.springCourse.springBootcamp.Payment.Entity.Base.BaseEntity;
+import com.springCourse.springBootcamp.Payment.Enum.PaymentChannel;
+import com.springCourse.springBootcamp.Payment.Enum.PaymentInstallment;
+import com.springCourse.springBootcamp.Payment.Enum.PaymentType;
+import com.springCourse.springBootcamp.User.Entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
-@Table(name = "SPRING_USER")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
-public class Payment implements Serializable {
+@Table(name = "SPRING_PAYMENT", schema = "public")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Payment extends BaseEntity implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     private Long transactionNumber;
-    private UserDto userDto;
-    private double amount;
-    private Date transactionDate;
+    private Long userId;
 
-    @Enumerated(EnumType.ORDINAL)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    double amount;
+    private PaymentChannel paymentChannel;
     private PaymentType paymentType;
     private PaymentInstallment paymentInstallment;
-    private Credit credit;
-    private PaymentChannel paymentChannel;
+    Date insDate;
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Payment payment = (Payment) o;
-        return Id != null && Objects.equals(Id, payment.Id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public Payment clone() {
+        try {
+            Payment clone = (Payment) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
